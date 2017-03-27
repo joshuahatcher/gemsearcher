@@ -28,14 +28,14 @@ describe('favoritesService', () => {
       });
     });
 
-    it('adds stringified favorited gems to local storage', inject(($window) => {
-      spyOn($window.localStorage, 'setItem');
+    it('adds stringified favorited gems to local storage', () => {
+      spyOn(localStorage, 'setItem');
       spyOn(angular, 'toJson');
       underTest.add(mockGem);
 
-      expect($window.localStorage.setItem).toHaveBeenCalled();
+      expect(localStorage.setItem).toHaveBeenCalled();
       expect(angular.toJson).toHaveBeenCalledWith(underTest.favs);
-    }));
+    });
   });
 
   describe('remove', () => {
@@ -55,13 +55,13 @@ describe('favoritesService', () => {
       expect(underTest.favs).toEqual({});
     });
 
-    it('updates local storage after removal', inject(($window) => {
-      spyOn($window.localStorage, 'setItem');
+    it('updates local storage after removal', () => {
+      spyOn(localStorage, 'setItem');
       spyOn(angular, 'toJson');
       underTest.remove('someFav');
 
-      expect($window.localStorage.setItem).toHaveBeenCalled();
+      expect(localStorage.setItem).toHaveBeenCalled();
       expect(angular.toJson).toHaveBeenCalledWith(underTest.favs);
-    }));
+    });
   });
 });
