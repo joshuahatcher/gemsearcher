@@ -25,4 +25,4 @@ app.service('apiService', require('./search/api.service'));
 app.controller('searchController', require('./search/search.controller'));
 app.controller('favoritesController', require('./favorites/favorites.controller'));
 
-module.exports = app.name;
+module.export = app.name;
