@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Joshua Hatcher's Amazing RubyGems Search App</title>
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body ng-app="app">
+    <div class="container">
+      <h1>Joshua Hatcher's Amazing RubyGems Search App</h1>
+
+      <div class="search" ng-controller="searchController as ctrl">
+        <label>Mine for a gems:</label>
+        <input type="text" ng-model="searchInput"></input>
+        <button ng-click="ctrl.searchGems(searchInput)">Search</button>
+
+        <div ng-if="!ctrl.loading">
+          <div ng-if="ctrl.gemData && ctrl.gemData.length">
+            <ul class="gem-list">
+              <li ng-repeat="gem in ctrl.gemData">
+                <div>
+                  <strong>{{gem.name}}:</strong> {{gem.info}} 
+                  | <a href ng-click="ctrl.addToFavs(gem)">Add to favorites</a>
+                </div>
+                <div class="dependencies">
+                  <a
+                    href
+                    ng-if="gem.dependencies.development.length"
+                    ng-click="ctrl.showDependencies(gem, 'development')"
+                  >
+                    Development Dependencies
+                  </a> 
+                  <a
+                    href
+                    ng-if="gem.dependencies.runtime.length"
+                    ng-click="ctrl.showDependencies(gem, 'runtime')"
+                  >
+                    Runtime Dependencies
+                  </a>
+
+                  <ul ng-show="gem.dependencyList">
+                    <li ng-repeat="dependency in gem.dependencyList">
+                      {{dependency.name}}: {{dependency.requirements}}
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <p ng-if="ctrl.gemData && !ctrl.gemData.length">
+            Sorry, no RubyGems exist that match your search. Please try again!
+          </p>
+        </div>
+        <img class="loader" ng-show="ctrl.loading" src="http://www.drivethrurpg.com/shared_images/ajax-loader.gif" />
+      </div>
+
+      <div class="favorites" ng-controller="favoritesController as ctrl">
+        <h3>Favorite Gems:</h3>
+        <ul ng-if="ctrl.favorites">
+          <li ng-repeat="fav in ctrl.favorites track by $index">{{fav.name}} 
+            <a href ng-click="ctrl.remove(fav.name)">Remove</a>
+          </li>
+        </ul>
+        <p ng-if="ctrl.favorites | isEmpty">You have no favorites. Why don't you add some?</p>
+      </div>
+    </div>
+  </body>
+</html>

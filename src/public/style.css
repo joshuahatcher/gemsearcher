@@ -1,0 +1,66 @@
+h1, h3, p, li, label, button {
+  font-family: 'Slabo 27px', serif;
+}
+
+button {
+  background: #e5e5ff;
+  border: 1px solid;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.5s all ease-in-out;
+}
+
+button:hover {
+  background: pink;
+}
+
+a:hover {
+  color: pink;
+  transition: 0.5s all ease-in-out;
+}
+
+ul.gem-list {
+  list-style: none;
+}
+
+ul.gem-list > li {
+  padding: 1em
+}
+
+ul.gem-list > li:nth-child(2n) {
+  background: white;
+}
+
+.container {
+  background: #eee;
+  width: 70%;
+  margin: auto;
+  padding: 1em 2em;
+}
+
+.dependencies a {
+  margin-right: 1em;
+}
+
+.dependencies li {
+  padding: 0.5em;
+}
+
+.favorites {
+  background: #e5e5ff;
+  margin: 2em 0 0;
+  padding: 1em;
+}
+
+.loader {
+  display: block;
+  width: 100px;
+  margin: auto;
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: 90%;
+    padding: 1em 4%;
+  }
+}
